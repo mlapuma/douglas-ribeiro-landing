@@ -165,7 +165,7 @@ p {
 }
 
 .hero-media {
-  background: url("assets/holding-hero.png") center right / cover no-repeat;
+  background: url("/douglas-ribeiro-landing/assets/holding-hero.png") center right / cover no-repeat;
   transform: scale(1.02);
 }
 
@@ -493,7 +493,7 @@ h3 {
   padding-inline: clamp(18px, 5vw, 72px);
   background:
     linear-gradient(rgba(7, 17, 31, 0.92), rgba(7, 17, 31, 0.92)),
-    url("assets/holding-hero.png") center / cover no-repeat fixed;
+    url("/douglas-ribeiro-landing/assets/holding-hero.png") center / cover no-repeat fixed;
 }
 
 .authority > div {
@@ -652,6 +652,124 @@ details p {
   margin-bottom: 0;
   color: var(--white);
   font-weight: 900;
+}
+
+.page-hero {
+  position: relative;
+  padding: 150px 0 86px;
+  color: var(--white);
+  background:
+    linear-gradient(90deg, rgba(5, 7, 11, 0.98), rgba(7, 17, 31, 0.88)),
+    url("/douglas-ribeiro-landing/assets/holding-hero.png") center right / cover no-repeat;
+}
+
+.page-hero .inner,
+.content-layout,
+.blog-list {
+  width: min(1040px, calc(100% - 36px));
+  margin: 0 auto;
+}
+
+.page-hero h1 {
+  max-width: 880px;
+  font-size: clamp(2.35rem, 5.3vw, 5rem);
+}
+
+.page-hero p {
+  max-width: 760px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1.12rem;
+  line-height: 1.7;
+}
+
+.content-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 42px;
+  padding: 70px 0;
+}
+
+.rich-content {
+  min-width: 0;
+}
+
+.rich-content h2 {
+  margin-top: 38px;
+  font-size: clamp(1.75rem, 3.2vw, 2.7rem);
+}
+
+.rich-content h3 {
+  margin-top: 28px;
+}
+
+.rich-content p,
+.rich-content li {
+  color: var(--muted);
+  font-size: 1.03rem;
+  line-height: 1.85;
+}
+
+.rich-content ul {
+  padding-left: 22px;
+}
+
+.sidebar-card {
+  position: sticky;
+  top: 104px;
+  padding: 24px;
+  color: var(--white);
+  background: linear-gradient(145deg, var(--black), var(--navy-2));
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.sidebar-card p {
+  color: rgba(255, 255, 255, 0.74);
+  line-height: 1.65;
+}
+
+.internal-links {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.internal-links a {
+  padding: 12px;
+  color: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+}
+
+.blog-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  padding: 70px 0;
+}
+
+.blog-list a {
+  min-height: 220px;
+  padding: 28px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 12px 34px rgba(7, 17, 31, 0.06);
+}
+
+.blog-list span {
+  display: inline-flex;
+  margin-bottom: 14px;
+  color: var(--gold);
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.blog-list p {
+  color: var(--muted);
+  line-height: 1.7;
 }
 
 [data-reveal] {
@@ -816,5 +934,14 @@ details p {
   .site-footer span {
     display: block;
     margin-top: 10px;
+  }
+
+  .content-layout,
+  .blog-list {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar-card {
+    position: static;
   }
 }
