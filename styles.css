@@ -165,14 +165,14 @@ p {
 }
 
 .hero-media {
-  background: url("/douglas-ribeiro-landing/assets/holding-hero.png") center right / cover no-repeat;
+  background: url("assets/holding-hero.png") center right / cover no-repeat;
   transform: scale(1.02);
 }
 
 .hero-shade {
   background:
-    linear-gradient(90deg, rgba(5, 7, 11, 0.98) 0%, rgba(7, 17, 31, 0.9) 38%, rgba(7, 17, 31, 0.26) 72%),
-    linear-gradient(0deg, rgba(5, 7, 11, 0.76) 0%, transparent 44%);
+    linear-gradient(90deg, rgba(5, 7, 11, 0.98) 0%, rgba(7, 17, 31, 0.86) 36%, rgba(7, 17, 31, 0.1) 66%),
+    linear-gradient(0deg, rgba(5, 7, 11, 0.58) 0%, transparent 46%);
 }
 
 .hero-content {
@@ -493,7 +493,7 @@ h3 {
   padding-inline: clamp(18px, 5vw, 72px);
   background:
     linear-gradient(rgba(7, 17, 31, 0.92), rgba(7, 17, 31, 0.92)),
-    url("/douglas-ribeiro-landing/assets/holding-hero.png") center / cover no-repeat fixed;
+    url("assets/holding-hero.png") center / cover no-repeat fixed;
 }
 
 .authority > div {
@@ -660,7 +660,7 @@ details p {
   color: var(--white);
   background:
     linear-gradient(90deg, rgba(5, 7, 11, 0.98), rgba(7, 17, 31, 0.88)),
-    url("/douglas-ribeiro-landing/assets/holding-hero.png") center right / cover no-repeat;
+    url("assets/holding-hero.png") center right / cover no-repeat;
 }
 
 .page-hero .inner,
