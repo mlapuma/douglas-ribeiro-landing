@@ -1,6 +1,6 @@
-# Landing Page - Dr. Douglas Ribeiro Advogados
+# Landing Page - Holding Patrimonial
 
-Página estática criada para apresentação comercial de uma landing page jurídica.
+Página estática criada para captação de leads em holding patrimonial, holding familiar, planejamento sucessório e proteção de bens.
 
 ## Como abrir
 
@@ -18,4 +18,8 @@ Use o número com DDI e DDD, apenas dígitos.
 
 ## Imagens
 
-As imagens em `assets/` foram geradas para uso nesta proposta visual, usando os prints enviados como referência de identidade e posicionamento.
+As imagens em `assets/` foram geradas para uso nesta proposta visual, com posicionamento premium para consultoria patrimonial.
+
+## SEO
+
+O site inclui meta title, meta description, Open Graph, canonical, JSON-LD e seções planejadas para termos como `holding patrimonial`, `holding familiar`, `planejamento sucessório`, `proteção patrimonial` e `gestão patrimonial`.
