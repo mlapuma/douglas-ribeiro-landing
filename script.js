@@ -1,5 +1,52 @@
 const WHATSAPP_NUMBER = "5511999999999";
 const DEFAULT_MESSAGE = "Olá, Dr. Douglas Ribeiro. Vim pelo site e gostaria de solicitar uma consultoria sobre holding patrimonial.";
+const GA_MEASUREMENT_ID = "";
+const ENABLE_ANALYTICS_DEBUG = false;
+
+const debugAnalytics = (eventName, params) => {
+  if (ENABLE_ANALYTICS_DEBUG) {
+    console.info("[analytics]", eventName, params);
+  }
+};
+
+const trackEvent = (eventName, params = {}) => {
+  const payload = {
+    page_title: document.title,
+    page_location: window.location.href,
+    page_path: window.location.pathname,
+    ...params
+  };
+
+  debugAnalytics(eventName, payload);
+
+  if (typeof window.gtag === "function") {
+    window.gtag("event", eventName, payload);
+  }
+};
+
+window.siteAnalytics = {
+  event: trackEvent
+};
+
+if (GA_MEASUREMENT_ID) {
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () {
+    window.dataLayer.push(arguments);
+  };
+
+  const tag = document.createElement("script");
+  tag.async = true;
+  tag.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_MEASUREMENT_ID)}`;
+  document.head.appendChild(tag);
+
+  window.gtag("js", new Date());
+  window.gtag("config", GA_MEASUREMENT_ID, {
+    send_page_view: true,
+    page_title: document.title,
+    page_location: window.location.href,
+    page_path: window.location.pathname
+  });
+}
 
 const navToggle = document.querySelector(".nav-toggle");
 const body = document.body;
@@ -73,6 +120,64 @@ const counterObserver = new IntersectionObserver(
 
 document.querySelectorAll("[data-counter]").forEach((counter) => counterObserver.observe(counter));
 
+const trackedScrollDepths = new Set();
+const trackScrollDepth = () => {
+  const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+  if (documentHeight <= 0) {
+    return;
+  }
+
+  const percent = Math.round((window.scrollY / documentHeight) * 100);
+
+  [25, 50, 75, 90].forEach((depth) => {
+    if (percent >= depth && !trackedScrollDepths.has(depth)) {
+      trackedScrollDepths.add(depth);
+      trackEvent("scroll_depth", {
+        depth_percent: depth
+      });
+    }
+  });
+};
+
+window.addEventListener("scroll", trackScrollDepth, { passive: true });
+
+document.addEventListener("click", (event) => {
+  const link = event.target.closest("a");
+  const button = event.target.closest("button");
+  const target = link || button;
+
+  if (!target) {
+    return;
+  }
+
+  const label = target.textContent.trim().replace(/\s+/g, " ").slice(0, 120);
+  const href = link ? link.href : "";
+
+  if (target.classList.contains("whatsapp-link") || href.includes("wa.me")) {
+    trackEvent("whatsapp_click", {
+      click_text: label,
+      click_url: href
+    });
+    return;
+  }
+
+  if (target.classList.contains("button") || target.classList.contains("nav-cta")) {
+    trackEvent("cta_click", {
+      click_text: label,
+      click_url: href
+    });
+    return;
+  }
+
+  if (link && link.hostname && link.hostname !== window.location.hostname) {
+    trackEvent("outbound_click", {
+      click_text: label,
+      click_url: href
+    });
+  }
+});
+
 document.querySelector("#leadForm")?.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -87,6 +192,11 @@ document.querySelector("#leadForm")?.addEventListener("submit", (event) => {
     `Perfil: ${perfil}`,
     `Resumo: ${mensagem}`
   ].join("\n");
+
+  trackEvent("lead_form_submit", {
+    form_name: "holding_consultoria",
+    lead_profile: perfil
+  });
 
   window.open(buildWhatsappUrl(text), "_blank", "noopener");
 });
