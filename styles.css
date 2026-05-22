@@ -623,6 +623,11 @@ details p {
   color: rgba(255, 255, 255, 0.48);
 }
 
+.lead-form option {
+  color: var(--ink);
+  background: var(--white);
+}
+
 .floating-whatsapp {
   position: fixed;
   right: 18px;
