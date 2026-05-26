@@ -11,7 +11,7 @@ Abra o arquivo `index.html` no navegador.
 No arquivo `script.js`, altere:
 
 ```js
-const WHATSAPP_NUMBER = "5511999999999";
+const WHATSAPP_NUMBER = "5511985347903";
 ```
 
 Use o número com DDI e DDD, apenas dígitos.

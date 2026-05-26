@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBER = "5511999999999";
+const WHATSAPP_NUMBER = "5511985347903";
 const DEFAULT_MESSAGE = "Olá. Vim pelo site holding.acsacontabilidade.com.br e gostaria de solicitar uma consultoria sobre holding patrimonial.";
 const GA_MEASUREMENT_ID = "";
 const ENABLE_ANALYTICS_DEBUG = false;
