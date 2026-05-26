@@ -1,5 +1,5 @@
 const WHATSAPP_NUMBER = "5511999999999";
-const DEFAULT_MESSAGE = "Olá, Dr. Douglas Ribeiro. Vim pelo site e gostaria de solicitar uma consultoria sobre holding patrimonial.";
+const DEFAULT_MESSAGE = "Olá. Vim pelo site holding.acsacontabilidade.com.br e gostaria de solicitar uma consultoria sobre holding patrimonial.";
 const GA_MEASUREMENT_ID = "";
 const ENABLE_ANALYTICS_DEBUG = false;
 
@@ -186,7 +186,7 @@ document.querySelector("#leadForm")?.addEventListener("submit", (event) => {
   const perfil = formData.get("perfil");
   const mensagem = formData.get("mensagem");
   const text = [
-    "Olá, Dr. Douglas Ribeiro. Vim pelo site e gostaria de uma consultoria sobre holding patrimonial.",
+    "Olá. Vim pelo site holding.acsacontabilidade.com.br e gostaria de uma consultoria sobre holding patrimonial.",
     "",
     `Nome: ${nome}`,
     `Perfil: ${perfil}`,
