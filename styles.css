@@ -649,7 +649,19 @@ details p {
   background: var(--green);
   border-radius: 50%;
   box-shadow: 0 16px 42px rgba(31, 143, 95, 0.38);
-  font-weight: 900;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.floating-whatsapp:hover,
+.floating-whatsapp:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 48px rgba(31, 143, 95, 0.48);
+}
+
+.floating-whatsapp svg {
+  width: 34px;
+  height: 34px;
+  fill: currentColor;
 }
 
 .site-footer {
