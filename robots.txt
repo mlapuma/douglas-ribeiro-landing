@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mlapuma.github.io/douglas-ribeiro-landing/sitemap.xml
+Sitemap: https://holding.acsacontabilidade.com.br/sitemap.xml
