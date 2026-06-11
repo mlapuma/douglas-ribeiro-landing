@@ -1,7 +1,30 @@
 const WHATSAPP_NUMBER = "5511985347903";
+const PHONE_NUMBER = "5511985347903";
 const DEFAULT_MESSAGE = "Olá. Vim pelo site holding.acsacontabilidade.com.br e gostaria de solicitar uma consultoria sobre holding patrimonial.";
 const GA_MEASUREMENT_ID = "";
 const ENABLE_ANALYTICS_DEBUG = false;
+const GOOGLE_ADS_ID = "AW-16813286700";
+const GOOGLE_ADS_CONVERSIONS = {
+  whatsapp_click: "",
+  lead_form_submit: "",
+  phone_click: ""
+};
+
+const getTrafficContext = () => {
+  const params = new URLSearchParams(window.location.search);
+  const keys = ["gclid", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
+
+  return keys.reduce((context, key) => {
+    const value = params.get(key) || sessionStorage.getItem(key);
+
+    if (value) {
+      sessionStorage.setItem(key, value);
+      context[key] = value;
+    }
+
+    return context;
+  }, {});
+};
 
 const debugAnalytics = (eventName, params) => {
   if (ENABLE_ANALYTICS_DEBUG) {
@@ -14,6 +37,7 @@ const trackEvent = (eventName, params = {}) => {
     page_title: document.title,
     page_location: window.location.href,
     page_path: window.location.pathname,
+    ...getTrafficContext(),
     ...params
   };
 
@@ -24,8 +48,22 @@ const trackEvent = (eventName, params = {}) => {
   }
 };
 
+const trackConversion = (eventName, params = {}) => {
+  trackEvent(eventName, params);
+
+  const conversionLabel = GOOGLE_ADS_CONVERSIONS[eventName];
+
+  if (conversionLabel && typeof window.gtag === "function") {
+    window.gtag("event", "conversion", {
+      send_to: `${GOOGLE_ADS_ID}/${conversionLabel}`,
+      ...params
+    });
+  }
+};
+
 window.siteAnalytics = {
-  event: trackEvent
+  event: trackEvent,
+  conversion: trackConversion
 };
 
 if (GA_MEASUREMENT_ID) {
@@ -56,6 +94,10 @@ const buildWhatsappUrl = (message = DEFAULT_MESSAGE) =>
 
 document.querySelectorAll(".whatsapp-link").forEach((link) => {
   link.setAttribute("href", buildWhatsappUrl());
+});
+
+document.querySelectorAll(".phone-link").forEach((link) => {
+  link.setAttribute("href", `tel:+${PHONE_NUMBER}`);
 });
 
 navToggle?.addEventListener("click", () => {
@@ -155,9 +197,19 @@ document.addEventListener("click", (event) => {
   const href = link ? link.href : "";
 
   if (target.classList.contains("whatsapp-link") || href.includes("wa.me")) {
-    trackEvent("whatsapp_click", {
+    trackConversion("whatsapp_click", {
       click_text: label,
-      click_url: href
+      click_url: href,
+      conversion_source: "site_cta"
+    });
+    return;
+  }
+
+  if (href.startsWith("tel:") || target.classList.contains("phone-link")) {
+    trackConversion("phone_click", {
+      click_text: label,
+      click_url: href,
+      conversion_source: "phone_cta"
     });
     return;
   }
@@ -193,9 +245,10 @@ document.querySelector("#leadForm")?.addEventListener("submit", (event) => {
     `Resumo: ${mensagem}`
   ].join("\n");
 
-  trackEvent("lead_form_submit", {
+  trackConversion("lead_form_submit", {
     form_name: "holding_consultoria",
-    lead_profile: perfil
+    lead_profile: perfil,
+    conversion_source: "lead_form"
   });
 
   window.open(buildWhatsappUrl(text), "_blank", "noopener");
