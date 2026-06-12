@@ -5,9 +5,9 @@ const GA_MEASUREMENT_ID = "";
 const ENABLE_ANALYTICS_DEBUG = false;
 const GOOGLE_ADS_ID = "AW-16813286700";
 const GOOGLE_ADS_CONVERSIONS = {
-  whatsapp_click: "",
-  lead_form_submit: "",
-  phone_click: ""
+  whatsapp_click: "A2t1COeV6b0cEKzKmdE-",
+  lead_form_submit: "hG9WCPbi7b0cEKzKmdE-",
+  phone_click: "h0O3CLr8070cEKzKmdE-"
 };
 
 const getTrafficContext = () => {
